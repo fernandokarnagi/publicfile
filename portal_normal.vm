@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+#parse ($init)
+
+<html class="$root_css_class" dir="#language ("lang.dir")" lang="$w3c_language_id">
+
+<head>
+	<title>$the_title - $company_name</title>
+
+	<meta content="initial-scale=1.0, width=device-width" name="viewport" />
+
+	$theme.include($top_head_include)
+	
+	<style>
+		.lfr-nav-item > a > span {
+    		padding-left: 0 !important;      
+		}   
+		  
+ 		#wrapper {
+		    position: initial;
+		}
+		
+ 		#footer-background {
+		    background-color: #000;
+		    color: #888;
+		}
+  
+		#footer {
+		    border-top: 1px solid #555;
+		    background: none repeat scroll 0 0 #333;
+		    padding: 0 5em 2em;
+		    position: absolute;
+		    right: 0;    
+		    left: 0;
+		    text-align: left;
+		    bottom: 0;
+		}
+		
+		#footer-content {  
+		    background: none repeat scroll 0 0 #333;
+		    color: #c5c5c5;
+		    padding-bottom: 40px;
+		    padding-left: 40px;
+		    padding-right: 40px;
+		}
+		
+		.foter-content-row .col-left {
+		    float: left;
+		    width: 25%;
+		    text-align: center;
+		}
+		
+		.footer_link_header {
+		    font-size: 12px;
+		    font-weight: 500;
+		    text-transform: uppercase;
+		    padding-bottom: .5em;
+		    color: #EEE;  
+		}
+		
+		.footerlink_href {  
+			font-size: 12px;
+		    font-weight: 300;
+		}
+		
+	</style>
+</head>
+
+<body class="$css_class fms">
+
+<a href="#main-content" id="skip-to-content">#language ("skip-to-content")</a>
+
+$theme.include($body_top_include)
+
+#if($theme.getSetting("docbar") == true && $is_signed_in)
+#dockbar()  
+#end
+
+<div class="container-fluid" id="wrapper">
+	<header id="banner" role="banner">
+		#if($theme.getSetting("header") == true)	
+			<div id="heading">
+				<div class="left-logo">
+				<a class="$logo_css_class" href="$site_default_url" title="#language_format ("go-to-x", [$site_name])">
+							<img alt="$logo_description" src="$themeDisplay.getPathThemeImages()/logo.jpg"/>
+				</a>
+				</div>					
+						
+				<div class="right-logo">
+							<img  alt="$logo_description" src="$themeDisplay.getPathThemeImages()/right-logo.jpg"/>
+				</div>   
+			</div>
+		#end
+
+		#if($theme.getSetting("navigation") == true)
+			#if ($has_navigation || $is_signed_in)
+				#parse ("$full_templates_path/navigation.vm")
+			#end
+		#end
+	</header>
+
+	<div id="content">	  
+		#if($theme.getSetting("breadcrumb") == true)
+			<div id="breadcrumbs">#breadcrumbs()</div>
+		#end
+		
+		#if($theme.getSetting("search") == true)
+			<div id="searchDiv">
+				<input id="search" type="text" name="search" value="Search" onkeydown="if(event.keyCode == 13) { 	onclickSearch();  }" onfocus="if (this.value=='Search'){this.value='';};return false;" onblur="if (this.value==''){this.value='Search';return false;}">
+				<input type="submit" style="margin-top: 6px;" value="" onclick="javascript:onclickSearch();">
+			</div>
+		#end  
+		
+		<div style="clear:both;"></div>
+		
+		#if ($selectable)
+			$theme.include($content_include)
+		#else
+			$portletDisplay.recycle()
+
+			$portletDisplay.setTitle($the_title)
+
+			$theme.wrapPortlet("portlet.vm", $content_include)
+		#end
+	</div>
+	
+
+	#if($theme.getSetting("footer") == true)
+		<footer id="footer" role="contentinfo">
+		
+			<div id="footer">  
+				<br/> 
+				<div id="footer-content">
+				 	<div class="foter-content-row">
+						<div class="col-left">
+							<span class="footer_link_header">$theme.getSetting("footerlink1_header")</span><br/>
+							<a class="footerlink_href" style="color: #cbcbcb; text-decoration: none;" href="$theme.getSetting("footerlink1_href1")">$theme.getSetting("footerlink1_title1")</a><br/>
+							<a class="footerlink_href" style="color: #cbcbcb; text-decoration: none;" href="$theme.getSetting("footerlink1_href2")">$theme.getSetting("footerlink1_title2")</a><br/>
+							<a class="footerlink_href" style="color: #cbcbcb; text-decoration: none;" href="$theme.getSetting("footerlink1_href3")">$theme.getSetting("footerlink1_title3")</a><br/>
+							<a class="footerlink_href" style="color: #cbcbcb; text-decoration: none;" href="$theme.getSetting("footerlink1_href4")">$theme.getSetting("footerlink1_title4")</a><br/> 
+						</div>
+						<div class="col-left">
+							<span class="footer_link_header">$theme.getSetting("footerlink2_header")</span><br/>
+							<a class="footerlink_href" style="color: #cbcbcb; text-decoration: none;" href="$theme.getSetting("footerlink2_href1")">$theme.getSetting("footerlink2_title1")</a><br/>
+							<a class="footerlink_href" style="color: #cbcbcb; text-decoration: none;" href="$theme.getSetting("footerlink2_href2")">$theme.getSetting("footerlink2_title2")</a><br/>
+							<a class="footerlink_href" style="color: #cbcbcb; text-decoration: none;" href="$theme.getSetting("footerlink2_href3")">$theme.getSetting("footerlink2_title3")</a><br/>
+							<a class="footerlink_href" style="color: #cbcbcb; text-decoration: none;" href="$theme.getSetting("footerlink2_href4")">$theme.getSetting("footerlink2_title4")</a><br/> 
+						</div>
+						<div class="col-left">
+							<span class="footer_link_header">$theme.getSetting("footerlink3_header")</span><br/>
+							<a class="footerlink_href" style="color: #cbcbcb; text-decoration: none;" href="$theme.getSetting("footerlink3_href1")">$theme.getSetting("footerlink3_title1")</a><br/>
+							<a class="footerlink_href" style="color: #cbcbcb; text-decoration: none;" href="$theme.getSetting("footerlink3_href2")">$theme.getSetting("footerlink3_title2")</a><br/>
+							<a class="footerlink_href" style="color: #cbcbcb; text-decoration: none;" href="$theme.getSetting("footerlink3_href3")">$theme.getSetting("footerlink3_title3")</a><br/>
+							<a class="footerlink_href" style="color: #cbcbcb; text-decoration: none;" href="$theme.getSetting("footerlink3_href4")">$theme.getSetting("footerlink3_title4")</a><br/> 
+						</div>  
+						<div class="col-left">
+							<span class="footer_link_header">$theme.getSetting("footerlink4_header")</span><br/>
+							<a class="footerlink_href" style="color: #cbcbcb; text-decoration: none;" href="$theme.getSetting("footerlink4_href1")">$theme.getSetting("footerlink4_title1")</a><br/>
+							<a class="footerlink_href" style="color: #cbcbcb; text-decoration: none;" href="$theme.getSetting("footerlink4_href2")">$theme.getSetting("footerlink4_title2")</a><br/>
+							<a class="footerlink_href" style="color: #cbcbcb; text-decoration: none;" href="$theme.getSetting("footerlink4_href3")">$theme.getSetting("footerlink4_title3")</a><br/>
+							<a class="footerlink_href" style="color: #cbcbcb; text-decoration: none;" href="$theme.getSetting("footerlink4_href4")">$theme.getSetting("footerlink4_title4")</a><br/> 
+						</div>
+					</div>   
+				</div>  
+				
+			</div> 	
+		</footer>	
+	#end
+	
+	<div id="adjuster" style="height: 100%">&nbsp;
+	</div>	
+	
+	#if($theme.getSetting("footer-short") == true)
+		<footer id="footer" role="contentinfo" style="padding-bottom: 0px; text-align: center; position: relative; overflow: hidden; ">
+		  
+			<a class="footerlink_href" style="color: #cbcbcb; text-decoration: none;" href="/sitemap">Site Map</a> 
+			<span style="color: #ddd">|<span> 
+			<a class="footerlink_href" style="color: #cbcbcb; text-decoration: none;" href="/contact-us">Contact Us</a>
+			
+		</footer>	
+	#end
+	 
+</div>
+
+$theme.include($body_bottom_include)
+
+$theme.include($bottom_include)
+
+</body>
+
+</html>
