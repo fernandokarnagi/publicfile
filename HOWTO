@@ -1,0 +1,5 @@
+http://stackoverflow.com/questions/19595067/git-add-commit-and-push-commands-in-one
+
+git add .
+git commit -a -m "commit" (do not need commit message either)
+git push
