@@ -1,0 +1,22 @@
+#if (!$entries.isEmpty())
+    <div>
+    <ul style="list-style: none; padding-left:0; margin-bottom: 2px; margin-left: 2px;">
+    #foreach ($entry in $entries)
+        #set($renderer = $entry.getAssetRenderer() ) 
+        #set($className = $renderer.getClassName() )
+        #if( $className == "com.liferay.portlet.bookmarks.model.BookmarksEntry" )
+            #set($link = $entry.getUrl())
+            #if ($link.indexOf("daosvgwebap01") >= 0 || $link.indexOf("dbosvgwebap01") >= 0) 
+                #set($idx = $link.indexOf("/", 8))
+                #set($link = $link.substring($idx, $link.length()))
+            #end
+            #set($title = $entry.getDescription() ) 
+            
+            <li>
+                <a href="$link">$title</a>
+            </li>
+        #end
+    #end
+    </ul>
+    </div>
+#end
