@@ -1,0 +1,3 @@
+.aui .row-fluid .span4 {width: 250px !important;}
+.aui .row-fluid .span2 {width: 240px !important;}
+
