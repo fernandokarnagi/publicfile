@@ -1,0 +1,26 @@
+1. CR - view page -> attachment name can be hidden, but need to also hide the gap between Attachment and Assigned To
+ --> Fixed by adding the below line in the page JS
+elems[i].parentElement.style.height = "1px"; 
+
+2. CR - add page -> upon successfully uploaded, no alert shown
+ --> Fixed by changing this function (added alert)
+
+
+function setReturnValue(returnStr){	 
+	console.log("returnStr: " + returnStr);
+	var id;
+	try {
+    		var matches = [];
+	    	var elems = document.getElementsByTagName("*");
+    		for (var i = 0; i < elems.length; i++) {
+        		if (elems[i].id.indexOf("FilePath") >= 0) {
+	            	id = elems[i].id;
+        	    }
+	    	}
+	} catch (e) {}  
+ 	document.getElementById(id).value = returnStr;
+	alert("File has been successfully uploaded"); 
+}
+
+3. Huge icons on News list page
+ --> Fixed by manually resizing the image size to 50x50 px
