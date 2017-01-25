@@ -1,0 +1,36 @@
+<%@page import="com.liferay.portlet.dynamicdatalists.service.DDLRecordLocalServiceUtil"%>
+<%@page import="com.liferay.portal.kernel.json.JSONFactoryUtil"%>
+<%@page import="com.liferay.portal.kernel.json.JSONObject"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.Collection"%>
+<%@page import="com.liferay.portlet.dynamicdatamapping.storage.Field"%>
+<%@page import="com.liferay.portlet.dynamicdatalists.service.DDLRecordServiceUtil"%>
+<%@page import="com.liferay.portlet.dynamicdatalists.model.DDLRecord"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+	<%
+		//Code to get attachment UUID
+		String ddlRecordId = "51224";
+		DDLRecord record = DDLRecordLocalServiceUtil.getRecord(Long.parseLong(ddlRecordId));
+		Field field = record.getField("Attachment");
+		Field fieldFileName = record.getField("FilePath");
+		Collection colls = field.getValuesMap().values();
+		Iterator it = colls.iterator();
+		List data = (List) it.next();
+		Iterator it2 = data.iterator();
+		String attachment = it2.next().toString();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(attachment);
+		String docUuid = jsonObject.getString("uuid"); 
+		String fileName = fieldFileName.getValue().toString();
+	%>
+	
+	<a href="/documents/22227/47567/<%=fileName%>/<%=docUuid%>"><%=fileName%></a>
+</body>
+</html>
